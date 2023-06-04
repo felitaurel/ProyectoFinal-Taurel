@@ -30,11 +30,23 @@ const crearEmpleado = () => {
         
     })
 } 
-
+const limpiarPantalla = () => {
+    const limpiar = document.querySelector("#limpiar")
+    limpiar.addEventListener("submit", (e) =>{
+        e.preventDefault()
+        localStorage.clear();
+        var elementos = document.getElementsByTagName('p');
+        console.log(elementos)
+        
+        while (elementos.length > 0){
+            elementos[0].remove();
+        }
+    })
+}
 const verItem = (item) =>{
     var lugar = document.querySelector("parrafo")
     var descripcion = document.createElement('p')
-    descripcion.innerHTML = `<p>El empleado ${item.nombre} tiene el cargo de ${item.cargo} y un sueldo de  ${item.sueldo}</p>`
+    descripcion.innerHTML = `<p>El empleado ${item.nombre} tiene el cargo de ${item.cargo} y un sueldo de  ${item.salario}</p>`
     
     document.body.appendChild(descripcion)
     
@@ -48,6 +60,7 @@ const verItems = () =>{
 }
 verItems()
 crearEmpleado()
+limpiarPantalla()
 
 
   /*
