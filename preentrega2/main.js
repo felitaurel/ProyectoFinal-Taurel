@@ -1,7 +1,7 @@
 class Empleados {
-    constructor(nombre, puesto, salario) {
+    constructor(nombre, cargo, salario) {
         this.nombre = nombre;
-        this.puesto = puesto;
+        this.cargo = cargo;
         this.salario = salario;
     }
     aumento(porcentaje){
@@ -10,6 +10,36 @@ class Empleados {
     
 }
   
+
+const items = JSON.parse(localStorage.getItem("empleados")) || []
+
+
+const crearEmpleado = () => {
+    const crearItem = document.querySelector("#crearEmpleado")
+    crearItem.addEventListener("submit",(e)=>{
+        e.preventDefault()
+        const nombre = e.target.children["nombre"].value
+        const cargo = e.target.children["cargo"].value
+        const sueldo = e.target.children["sueldo"].value
+        const empleado = new Empleados(nombre, cargo, sueldo)
+        items.push(empleado)
+        localStorage.setItem("items",JSON.stringify(empleado) )
+        verItem(empleado)
+        console.log(empleado)
+        crearItem.reset()
+        
+    })
+} 
+
+const verItem = (item) =>{
+    const descripcion = document.createElement("p")
+    descripcion.textContent = `<p>El empleado ${item.nombre} tiene el cargo de ${item.cargo} y un sueldo de  ${item.sueldo}</p>`
+    
+}
+
+crearEmpleado()
+
+
   /*
     let arregloEmpleados = [];
     let continuar = true;
@@ -58,7 +88,7 @@ if (confirm("Quiere algun dato de un empleado?")){ // aca podria preguntarle que
     }
 }*/
 
-
+/*
 
 const verEmpleado = ({id,pregunta,opciones}) =>{
     const formularioPregunta = document.createElement("form")
@@ -99,4 +129,4 @@ const verEmpleado = ({id,pregunta,opciones}) =>{
     })
 
 }
-verEmpleado(preguntas[0])
+verEmpleado(preguntas[0])*/
