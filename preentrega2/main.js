@@ -1,8 +1,7 @@
 class Empleados {
-    constructor(nombre, edad, puesto, salario) {
+    constructor(nombre, cargo, salario) {
         this.nombre = nombre;
-        this.edad = edad;
-        this.puesto = puesto;
+        this.cargo = cargo;
         this.salario = salario;
     }
     aumento(porcentaje){
@@ -11,7 +10,60 @@ class Empleados {
     
 }
   
-  
+
+const items = JSON.parse(localStorage.getItem("empleados")) || []
+
+
+const crearEmpleado = () => {
+    const crearItem = document.querySelector("#crearEmpleado")
+    crearItem.addEventListener("submit",(e)=>{
+        e.preventDefault()
+        const nombre = e.target.children["nombre"].value
+        const cargo = e.target.children["cargo"].value
+        const sueldo = e.target.children["sueldo"].value
+        const empleado = new Empleados(nombre, cargo, sueldo)
+        items.push(empleado)
+        localStorage.setItem("empleados",JSON.stringify(items) )
+        verItem(empleado)
+        console.log(empleado)
+        crearItem.reset()
+        
+    })
+} 
+const limpiarPantalla = () => {
+    const limpiar = document.querySelector("#limpiar")
+    limpiar.addEventListener("submit", (e) =>{
+        e.preventDefault()
+        localStorage.clear();
+        var elementos = document.getElementsByTagName('p');
+        console.log(elementos)
+        
+        while (elementos.length > 0){
+            elementos[0].remove();
+        }
+    })
+}
+const verItem = (item) =>{
+    var lugar = document.querySelector("parrafo")
+    var descripcion = document.createElement('p')
+    descripcion.innerHTML = `<p>El empleado ${item.nombre} tiene el cargo de ${item.cargo} y un sueldo de  ${item.salario}</p>`
+    
+    document.body.appendChild(descripcion)
+    
+}
+const verItems = () =>{
+
+    items.forEach(item => {
+        verItem(item)
+    })
+    
+}
+verItems()
+crearEmpleado()
+limpiarPantalla()
+
+
+  /*
     let arregloEmpleados = [];
     let continuar = true;
     while (continuar) {
@@ -57,4 +109,47 @@ if (confirm("Quiere algun dato de un empleado?")){ // aca podria preguntarle que
             console.log(`El empleado ${arregloEmpleados[i][0]} tiene ${arregloEmpleados[i][1]} años y un sueldo de ${arregloEmpleados[i][3]} pesos en su puesto de ${arregloEmpleados[i][2]}`)
         }   
     }
+}*/
+
+/*
+
+const verEmpleado = ({id,pregunta,opciones}) =>{
+    const formularioPregunta = document.createElement("form")
+    formularioPregunta.className = "formularioPregunta"
+    formularioPregunta.id = "formularioPregunta" + id
+    const titulo = document.createElement("h3")
+    titulo.innerText = pregunta
+    formularioPregunta.append(titulo)
+    opciones.forEach((opcion,index) => {
+        const input = document.createElement("input")
+        input.id = "opcion" + index
+        input.type = "radio"
+        input.name = "respuesta"
+        input.value = index
+        const label = document.createElement("label")
+        label.setAttribute("for","opcion" + index)
+        label.innerText = opcion
+        formularioPregunta.append(input,label)
+    });
+    const btn = document.createElement("button")
+    btn.innerText = "Siguiente"
+    btn.type="submit"
+    formularioPregunta.append(btn)
+    const app = document.querySelector("#app")
+    app.append(formularioPregunta)
+
+//----------------------------------------
+    formularioPregunta.addEventListener("submit",(e)=>{
+        e.preventDefault()
+        const repuestaUsuario = e.target.children["respuesta"].value
+        preguntas.forEach((pregunta)=>{
+            if(pregunta.correcta == repuestaUsuario){
+            pregunta.respuesta = true
+        }
+        })
+        console.log(preguntas)
+        verPregunta(preguntas[id++])
+    })
+
 }
+verEmpleado(preguntas[0])*/

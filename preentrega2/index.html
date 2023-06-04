@@ -5,8 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+    <header>
+        <h1>Control empleados</h1>
+    </header>
+    <main>
+    
+        <form id="crearEmpleado">
+            <input type="text" name="nombre" placeholder="Ingrese el nombre del empleado" maxlength="50" minlength="4" required>
+            <input type="text" name="cargo" placeholder="Ingrese el cargo del empleado" required>
+            <input type="number" name="sueldo" placeholder="Ingrese el sueldo" min="10" max="2000000" required>
+            <button type="submit">Crear Empleado</button>
+        </form>
+        <form id="limpiar">
+            <button type="submit">Limpiar Pagina</button>
+        </form>
+        <p id="parrafo"></p>
+    </main>
+    <footer></footer>
     <script src="./main.js"></script>
 </body>
 </html>
