@@ -23,7 +23,7 @@ const crearEmpleado = () => {
         const sueldo = e.target.children["sueldo"].value
         const empleado = new Empleados(nombre, cargo, sueldo)
         items.push(empleado)
-        localStorage.setItem("items",JSON.stringify(empleado) )
+        localStorage.setItem("empleados",JSON.stringify(items) )
         verItem(empleado)
         console.log(empleado)
         crearItem.reset()
@@ -32,11 +32,21 @@ const crearEmpleado = () => {
 } 
 
 const verItem = (item) =>{
-    const descripcion = document.createElement("p")
-    descripcion.textContent = `<p>El empleado ${item.nombre} tiene el cargo de ${item.cargo} y un sueldo de  ${item.sueldo}</p>`
+    var lugar = document.querySelector("parrafo")
+    var descripcion = document.createElement('p')
+    descripcion.innerHTML = `<p>El empleado ${item.nombre} tiene el cargo de ${item.cargo} y un sueldo de  ${item.sueldo}</p>`
+    
+    document.body.appendChild(descripcion)
     
 }
+const verItems = () =>{
 
+    items.forEach(item => {
+        verItem(item)
+    })
+    
+}
+verItems()
 crearEmpleado()
 
 
