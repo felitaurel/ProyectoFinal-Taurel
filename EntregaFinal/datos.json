@@ -1,0 +1,5 @@
+[
+    {"nombre": "Felipe", "cargo": "Ingeniero", "salario": 50000},
+    {"nombre": "Francisco", "cargo": "Desarrollador", "salario": 60000},
+    {"nombre": "Catalina", "cargo": "Recursos Humanos", "salario": 50000}
+]

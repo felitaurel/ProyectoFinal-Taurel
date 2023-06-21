@@ -9,11 +9,21 @@ class Empleados {
     }
     
 }
-  
+
 
 const items = JSON.parse(localStorage.getItem("empleados")) || []
 
 
+
+const verEmpleados = async () =>{
+    const res = await fetch("./datos.json")
+    const emp = await res.json()
+    emp.forEach(producto =>{
+        
+        verItem(producto)
+        
+    })
+}
 const crearEmpleado = () => {
     const crearItem = document.querySelector("#crearEmpleado")
     crearItem.addEventListener("submit",(e)=>{
@@ -44,11 +54,11 @@ const limpiarPantalla = () => {
     })
 }
 const verItem = (item) =>{
-    var lugar = document.querySelector("parrafo")
+    var lugar = document.querySelector("#parrafo")
     var descripcion = document.createElement('p')
     descripcion.innerHTML = `<p>El empleado ${item.nombre} tiene el cargo de ${item.cargo} y un sueldo de  ${item.salario}</p>`
     
-    document.body.appendChild(descripcion)
+    lugar.appendChild(descripcion)
     
 }
 const verItems = () =>{
@@ -61,6 +71,7 @@ const verItems = () =>{
 verItems()
 crearEmpleado()
 limpiarPantalla()
+verEmpleados()
 
 
   /*
